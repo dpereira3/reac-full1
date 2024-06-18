@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import Nav from './Components/Nav/Nav'
-import Main from './Components/GitHub/Main'
+import Main from './Components/GitHup/Main'
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Data from './Components/GitHup/Data';
+import Specific from './Components/GitHup/Specific';
 
 class App extends Component {
   constructor(props) {
@@ -14,11 +16,13 @@ class App extends Component {
     return (
       <React.Fragment>
         <Nav />
-        <Router>
+        <BrowserRouter>
           <Routes>
-            <Route exact path='/' Component={Main} />
+            <Route exact path='/' Component={ Main } />
+            <Route extact path='/Data/:Id' Component={ Data } />
+            <Route exact path='/Specific/:login' Component= { Specific } />
           </Routes>
-        </Router>
+        </BrowserRouter>
       </React.Fragment>
     );
   }
