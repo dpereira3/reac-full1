@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 
 class Main extends Component {
@@ -9,7 +8,6 @@ class Main extends Component {
         Data: '',
         checked: false
     };
-    const { navigate } = this.props;
   }
 
   
@@ -22,22 +20,22 @@ class Main extends Component {
   }
 
   Search = (e) => {
-      //console.log(this.state.Data)
+      console.log(this.state.Data)
       if(this.state.Data === '') return alert('miss type search faild ca not be empty')
       //const navigate = useNavigate();
       // true: /Specific/User
       // false: /Data/User
 
       if(this.state.checked) {
-          /* this.props.history.push({
+          this.props.history.push({
               pathname: `/Specific/${this.state.Data}`
-          }) */
-          this.props.navigate(`/Specific/${this.state.Data}`)
+          })
+          //this.props.navigate(`/Specific/${this.state.Data}`)
       } else {
-          /* this.props.history.push({
+          this.props.history.push({
               pathname: `/Data/${this.state.Data}`
-          }) */
-          this.props.navigate(`/Data/${this.state.Data}`)
+          })
+          //this.props.navigate(`/Data/${this.state.Data}`)
       }
   }
 
@@ -87,7 +85,4 @@ class Main extends Component {
   }
 }
 
-export default function(props) {
-    const navigate = useNavigate();
-    return <Main {...props} navigate={navigate} />
-}
+export default Main
