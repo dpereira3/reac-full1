@@ -4,8 +4,22 @@ import { Link } from 'react-router-dom';
 class Nav extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { isAuthenticated:false };
   }
+
+  async componentDidMount(){
+    await this.props.store.subscribe(() => {
+      this.state({
+        isAuthenticated: this.props.store.getState()['Users']['isAuthenticated']
+      })
+    })
+  }
+
+  logOut = () => {
+    this.props.logOut();
+  }
+
+
   render() {
     return (
       <React.Fragment>
@@ -16,7 +30,16 @@ class Nav extends Component {
                       <i className="fas fa-heart"></i> Favorites  
                     </Link>     
                 </nav>
-                <a className="btn btn-outline-primary" href="#">Sign up</a>
+                { this.state.isAuthenticated ? 
+                  <button
+                    onClick={this.logOut}
+                    className="btn btn-outline-danger">Logout</button>
+                  :
+                  <Link to='/LoginRegister' className='p-2 text-dark'>
+                  <button className='btn btn-outline-primary'>Sign up</button>
+                  </Link>
+                }
+                
             </div>
       </React.Fragment>
     );
