@@ -7,6 +7,8 @@ require('dotenv').config();
 
 const router = express.Router();
 
+
+
 // Connect To DB
 const con = mysql.createConnection({
     host: process.env.DBHOST,

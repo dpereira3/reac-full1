@@ -35,7 +35,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/', express.static(path.join(__dirname, 'react')));
 
 // api
-// app.use('/api/users', Users);
+app.use('/api/users', User);
 
 // port
 const port = process.env.PORT || 4000;

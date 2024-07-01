@@ -20,10 +20,10 @@ class Login extends Component {
     Login = (e) => {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
-        const Data = { password:this.state.password, email:this.state.email, }
+        const Data = { password:this.state.password, email:this.state.email }
         axios.post(`${this.props.URL_backend}/Login`, { Data })
         .then((res) => {
-            if(res['data']){
+            if(res['Data']){
                 //Succefully operation
                 localStorage.setItem('token', res.data.token);
                 this.props.reUserState(true);
@@ -35,7 +35,7 @@ class Login extends Component {
                 this.setState({ errors:err })
             }
         })
-        .catch(err => this.setState({ errors:'User name or Password is uncorrect!' }));
+        .catch(err => console.log(err));
     }
 
     render() {
