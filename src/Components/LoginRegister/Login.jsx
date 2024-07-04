@@ -20,10 +20,24 @@ class Login extends Component {
     Login = (e) => {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
-        const Data = { password:this.state.password, email:this.state.email }
-        axios.post(`${this.props.URL_backend}/Login`, { Data })
+        const Data = { 
+            email:this.state.email, 
+            password:this.state.password 
+        };
+
+        console.log('Datos:', Data)
+        console.log(this.props.URL_backend)
+        axios.post(`${this.props.URL_backend}/Login`, { Data }, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            }
+        })
         .then((res) => {
-            if(res['Data']){
+            console.log('Datos:', Data)
+            
+            console.log(res)
+            /* if(res['Data']){
                 //Succefully operation
                 localStorage.setItem('token', res.data.token);
                 this.props.reUserState(true);
@@ -33,7 +47,7 @@ class Login extends Component {
                 // failed
                 const err = res.data;
                 this.setState({ errors:err })
-            }
+            } */
         })
         .catch(err => console.log(err));
     }

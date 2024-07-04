@@ -65,11 +65,14 @@ const jwtPrivateSecret = 'Ahmed#ReactNodeCourse';
 
 // login in
 router.post('/Login', async (req, res) => {
-    const email = req.body.email;
-    const pass = req.body.password;
+    //console.log(req.body)
+    const email = req.body.Data.email;
+    const pass = req.body.Data.password;
+    //console.log('email: ', email, 'pass: ', pass)
 
     con.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${pass}'`, 
     async function(err, result){
+        //console.log(result)
         if(result.length !== 0){
             jwt.sign({ UserEmail: email }, jwtPrivateSecret,
                 (err, token) => {
