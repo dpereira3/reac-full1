@@ -1,6 +1,7 @@
 const mysql = require('mysql2');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 
 // ENV variables
 require('dotenv').config();
@@ -23,6 +24,29 @@ con.connect(function(err){
     console.log('connected!');
 });
 // end
+
+// code for image upload / some settings...
+const MIME_TYPE_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg'
+};
+
+const storage = multer.diskStorage({
+    destination:(req, file, cb) => {
+        const isValid = MIME_TYPE_MAP[file.mimetype];
+        let error = new Error('Invalid mime Type')
+        if(isValid) { error = null; }
+        cb(error, 'images');
+    }, filename: (req, file, cb) =>{
+        const name = file.originalname
+        .toLocaleLowerCase
+        .split(' ')
+        .join('-');
+        const ext = MIME_TYPE_MAP[file.mimetype];
+        cb(null, name + '-' + Date,now() + '.' + ext )
+    }
+})
 
 // Select or Create the Users table
 function selectOrCreateTable(){
@@ -81,6 +105,75 @@ router.post('/Login', async (req, res) => {
         }
         if(result.length === 0){
             res.status(400).send({ message: 'Error: Not Found' });
+        }
+    })
+})
+
+// get user data
+router.get('/GetUserData', async (req, res) => {
+    const Token = req.headers['authorization'];
+    var decoded = jwt.decode(Token, { complete:true });
+    const UserE = decoded.payload.UserEmail;
+
+    const SQL = `SELECT * FROM users WHERE email='${UserE}'`;
+
+    con.query(SQL, function(err, result){
+        if(err) throw err;
+        res.status(200).send({ result });
+    })
+})
+
+// update user data name pic address
+
+const upload = multer({
+    storage:storage, limits:{ fieldSize:12*1024*1024 }
+}).single('image');
+
+router.put('/edit/:id', upload, (req, res, next ) => {
+    if(req.file && req.file !== ''){
+        const Id = req.params.id;
+        const URL = req.protocol+'://'+req.get('host');
+        const pic = URL + '/images/' + req.file.filename;
+
+        const name = req.body.name;
+        const adress = req.body.address;
+        // update with mysql
+        const SQL = `UPDATE users SET name = '${name}', adress = '${adress}', pic = '${pic}' WHERE id=${Id}`;
+        con.query(SQL, function(err, result){
+            if(err) throw err;
+            res.status(200).send({message:'successfully', result })
+        })
+    } else {
+        const Id = req.params.id;
+        const name = req.body.name;
+        const adress = req.body.address;
+
+        //update with mysql
+        const SQL = `UPDATE users SET name = '${name}', adress = '${adress}' WHERE id=${Id}`;
+        con.query(SQL, function(err, result){
+            if(err) throw err;
+            res.status(200).send({message:'Updated', result })
+        })
+    }
+})
+
+// delete one user
+router.delete('/delete/:id/:password', (req, res, next) => {
+    const Id = req.params.id;
+    const pass = req.params.password;
+
+    con.query(`SELECT * FROM users WHERE id='${Id}' AND password='${pass}'`, 
+    async function(err, result){
+        if(result.length !== 0){
+            //pass correct
+            con.query(`DELETE FROM users WHERE id='${Id}'`, 
+            async function(err, result){
+                if(err) throw err;
+                res.status(200).send({ message: result })
+            })
+        }
+        if(result.length === 0){
+            res.status(400).send({ message: 'Error the password is not correct'})
         }
     })
 })

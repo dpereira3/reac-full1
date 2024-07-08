@@ -1,8 +1,8 @@
 import { RE_USER_STATE } from '../Actions';
 
-const initialSTATE = { isAuthenticated:Boolean }
+const initialState = { isAuthenticated:Boolean }
 
-function Users( state = initialSTATE, action ){
+function Users( state = initialState, action ){
     switch(action.type){
         case RE_USER_STATE:
             state.isAuthenticated = action.payload;

@@ -1,0 +1,15 @@
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+
+function PrivateRoute({ component:Component, Auth, Logout, ...rest }){
+    return(
+        <Route {...rest} render={props => 
+            Auth ?
+            <component {...props} Logout={Logout} />
+            :
+            <Redirect to='/LoginRegister' />
+            } />
+    )
+}
+
+export default PrivateRoute;

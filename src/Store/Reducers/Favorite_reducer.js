@@ -1,6 +1,7 @@
 import { GET_FAVORITES, ADD_TO_FAVORITES, DELETE_FROM_FAVORITES } from '../Actions/index';
 
 const initialState = {
+    isAuthenticated:Boolean,
     FavoriteData: []
 }
 
