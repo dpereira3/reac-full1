@@ -37,7 +37,7 @@ class Profile extends Component {
                 }
             }).then( (res) => {
                 //console.log('res', res);
-                console.log('res data', res.data.result[0]);
+                //console.log('res data', res.data.result[0]);
 
                 if(this.mounted){
                     const data = res.data.result[0];
@@ -67,7 +67,7 @@ class Profile extends Component {
         let reader = new FileReader();
         let file = e.target.files[0];
 
-        reader.onloadend = () => {
+        reader.onload = () => {
             this.setState({
                 file: file,
                 pic: reader.result
@@ -105,7 +105,7 @@ class Profile extends Component {
         const file = this.state.file;
         const postData = new FormData();
         postData.append("name", this.state.name);
-        postData.append("address", this.state.adress);
+        postData.append("adress", this.state.adress);
         postData.append("pic", this.state.pic);
         postData.append("image", file);
 
@@ -206,10 +206,10 @@ class Profile extends Component {
                                     />
                                     <input
                                         type="text"
-                                        name="address"
+                                        name="adress"
                                         className="form-control m-2"
-                                        placeholder="address"
-                                        value={this.state.address ? this.state.address : ''}
+                                        placeholder="adress"
+                                        value={this.state.adress ? this.state.adress : ''}
                                         onChange={this.onChange}
                                     />
                                     <button onClick={this.SaveUserData}
@@ -236,8 +236,8 @@ class Profile extends Component {
                             <h4>Email  :<i className="bl">
                                 {this.state.email}</i> </h4>
 
-                            <h4>Address  :<i className="bl">
-                                {this.state.address ? this.state.address : '' } </i></h4>
+                            <h4>Adress  :<i className="bl">
+                                {this.state.adress ? this.state.adress : '' } </i></h4>
                             </div>
                             // end of show user data
                         }
@@ -245,7 +245,7 @@ class Profile extends Component {
                         {/*  Remove user */}
                             <div className="REMOVEU">
                                 <button
-                                    className="btn btn-danger m-d"
+                                    className="btn btn-danger m-2"
                                     onClick={this.handleOnClickRemove}>Delete Your Account</button>
                             </div>
                         {/* end of Remove User */}
