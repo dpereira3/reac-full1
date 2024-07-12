@@ -3,7 +3,7 @@ import Login from './Login';
 import Register from './Register';
 
 const PORT = process.env.PORT || 4000;
-const URL_backend = `http://localhost:${PORT}/api/users`;
+const URL_backend = `${process.env.URL_BACKEND}/api/users` || `http://localhost:${PORT}/api/users`;
 
 class LoginRegister extends Component {
     constructor(props){

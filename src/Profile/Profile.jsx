@@ -3,7 +3,7 @@ import axios from 'axios';
 import { confirm as confirmComplex } from './Confirm';
 
 const PORT = process.env.PORT || 4000;
-const URL_backend = `http://localhost:${PORT}/api/users`;
+const URL_backend = `${process.env.URL_BACKEND}/api/users` || `http://localhost:${PORT}/api/users`;
 
 class Profile extends Component {
 
