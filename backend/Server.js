@@ -9,7 +9,7 @@ require('dotenv').config()
 
 // user
 const User = require('./Routes/Users');
-const { useInsertionEffect } = require('react');
+//const { useInsertionEffect } = require('react');
 
 const app = express();
 
