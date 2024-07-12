@@ -33,25 +33,9 @@ con.connect(function(err){
     if(err) throw err;
 });
 
-con.on('error', () => console.log('error'));
-
-// this function is for server crashing errors. 
-
-/* var del = con._Protocol_delegateError;
-con._Protocol._delegateError = function(err, sequence) {
-    if(err.fatal){
-        console.trace('fatal err: ' + err.message);
-    }
-    return del.call(this, err, sequence);
-} */
-
 // this func allow users to visit this path
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/', express.static(path.join(__dirname, 'react')));
-
-// app.get('/*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'react', 'index.html'));
-// })
 
 // api
 app.use('/api/users', User);
