@@ -26,7 +26,7 @@ class Login extends Component {
         };
 
         //console.log('Datos:', Data)
-        //console.log(this.props.URL_backend)
+        console.log(this.props.URL_backend)
         axios.post(`${this.props.URL_backend}/Login`, { Data })
         .then((res) => {
             //console.log('Datos:', Data)
