@@ -49,7 +49,7 @@ class Register extends Component {
                 }
                 <hr></hr>
                 <form className="form-Reigester">
-                    <h4 className="h3 mb-3 font-weight-normal grey">Reigester</h4>
+                    <h4 className="h3 mb-3 font-weight-normal grey">Register</h4>
                     <input value={this.state.name} onChange={this.onChange} name="name" type="text" id="inputname" className="form-control" placeholder="Name" />
                     <input  value={this.state.email} onChange={this.onChange} name="email" type="email"  className="form-control" placeholder="Email address" />
                     <input  value={this.state.password} onChange={this.onChange} name="password" type="password"  className="form-control" placeholder="Password" />

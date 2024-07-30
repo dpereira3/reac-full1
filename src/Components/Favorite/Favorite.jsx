@@ -12,7 +12,7 @@ class Favorite extends Component {
     }
 
     async Data(){
-        console.log('Store2', this.props);
+        //console.log('Store2', this.props);
         let data = await this.props.Favorite.FavoriteData;
         let BigDATA = [];
         for(let index = 0; index < data.length; index++) {

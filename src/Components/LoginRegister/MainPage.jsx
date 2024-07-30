@@ -11,7 +11,7 @@ class LoginRegister extends Component {
         this.state = { };
     }
     componentDidMount(){
-        console.log('main: ', URL_backend);
+        //console.log('main: ', URL_backend);
     }
     
 

@@ -16,11 +16,11 @@ class Main extends Component {
       this.setState(() => ({
           checked: !this.state.checked
       }))
-      console.log(this.state.checked, 'check')
+      //console.log(this.state.checked, 'check')
   }
 
   Search = (e) => {
-      console.log(this.state.Data)
+      //console.log(this.state.Data)
       if(this.state.Data === '') return alert('miss type search faild ca not be empty')
       //const navigate = useNavigate();
       // true: /Specific/User

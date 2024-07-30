@@ -100,7 +100,7 @@ class Profile extends Component {
         this.setState({
             isEdit: false
         });
-        console.log(this.state);
+        //console.log(this.state);
 
         const file = this.state.file;
         const postData = new FormData();
@@ -109,11 +109,11 @@ class Profile extends Component {
         postData.append("pic", this.state.pic);
         postData.append("image", file);
 
-        console.log('ourdata', postData);
+        //console.log('ourdata', postData);
 
         axios.put(`${URL_backend}/edit/${this.state.id}`, postData)
         .then(res => {
-            console.log(res);
+            //console.log(res);
         })
         .catch((err) => {console.log(err)})
 
@@ -140,8 +140,8 @@ class Profile extends Component {
         const Pass = this.state.Password;
         axios.delete(`${URL_backend}/delete/${this.state.id}/${Pass}`)
         .then(res => {
-            console.log(res);
-            console.log(res.data.message);
+            //console.log(res);
+            //console.log(res.data.message);
             this.props.Logout();
         })
         .catch((err) => {this.setWrongpassword(err)} )

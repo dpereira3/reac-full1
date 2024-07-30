@@ -32,7 +32,7 @@ class Specific extends Component {
     }
 
     async componentDidMount(){
-        console.log('specific', this.props.Favorite.FavoriteData);
+        //console.log('specific', this.props.Favorite.FavoriteData);
         let data = this.props.Favorite.FavoriteData;
         let theUser = this.props.match.params.login;
 
